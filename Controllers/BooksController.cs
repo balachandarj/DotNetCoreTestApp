@@ -10,12 +10,17 @@ namespace TestApp.Controllers
     [Route("api/Books/")]
     public class BooksController : ControllerBase
     {
-        static BookService _bookService;
+        static IBookService _bookService;
 
 
         static BooksController()
-        {           
-            _bookService = new BookService();
+        {    
+            // Connect Mongo DB
+            //_bookService = new BookService();
+
+
+            // Use static Data
+            _bookService = new BookServiceStaticData();
         }
 
         [HttpGet]
@@ -25,7 +30,7 @@ namespace TestApp.Controllers
         }
 
         [HttpGet("GetBook")]
-        public Book GetBook(int bookId)
+        public Book? GetBook(int bookId)
         {
             return _bookService.GetBook(bookId);
         }

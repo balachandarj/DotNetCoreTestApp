@@ -4,7 +4,7 @@ using TestApp.Models;
 
 namespace TestApp.Services
 {
-    public class BookService
+    public class BookService:IBookService
     {
         IMongoDatabase _database;
 
@@ -22,7 +22,7 @@ namespace TestApp.Services
             return books;
         }
 
-        public Book GetBook(int bookId)
+        public Book? GetBook(int bookId)
         {
             var book = _database.GetCollection<Book>("Books").Find(o=>o.BookId == bookId).FirstOrDefault();
 
@@ -37,7 +37,7 @@ namespace TestApp.Services
 
         }
 
-        public Book UpdateBook(int bookId, Book book)
+        public Book? UpdateBook(int bookId, Book book)
         {
             var collection = _database.GetCollection<Book>("Books");
 
